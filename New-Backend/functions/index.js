@@ -23,6 +23,12 @@ const logger = require("firebase-functions/logger");
 // this will be the maximum concurrent request count.
 setGlobalOptions({ maxInstances: 10 });
 
+// Import payment webhook handlers
+const { stripeWebhook } = require("./src/stripeWebhook");
+
+// Export functions
+exports.stripeWebhook = stripeWebhook;
+
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
 
