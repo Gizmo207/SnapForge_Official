@@ -25,9 +25,11 @@ setGlobalOptions({ maxInstances: 10 });
 
 // Import payment webhook handlers
 const { stripeWebhook } = require("./src/stripeWebhook");
+const { testEmail } = require("./src/testEmail");
 
 // Export functions
 exports.stripeWebhook = stripeWebhook;
+exports.testEmail = testEmail;
 
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started

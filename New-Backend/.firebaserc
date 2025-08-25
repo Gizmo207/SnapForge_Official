@@ -1,5 +1,13 @@
 {
   "projects": {
     "default": "snapforge-ab371"
+  },
+  "targets": {},
+  "etags": {
+    "snapforge-ab371": {
+      "extensionInstances": {
+        "firestore-send-email": "d3f8641aa744e6b015755655b340162d73721b926725854cec467e773ca2065f"
+      }
+    }
   }
 }

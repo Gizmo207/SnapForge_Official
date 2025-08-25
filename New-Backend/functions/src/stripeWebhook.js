@@ -1,7 +1,9 @@
 ﻿const {onRequest} = require("firebase-functions/v2/https");
+const {logger} = require("firebase-functions");
 const {initializeApp, getApps} = require("firebase-admin/app");
 const {getFirestore} = require("firebase-admin/firestore");
 const crypto = require("crypto");
+const {queueLicenseEmail} = require("./email");
 
 if (!getApps().length) {
   initializeApp();
@@ -25,7 +27,7 @@ exports.stripeWebhook = onRequest({
 }, async (req, res) => {
   try {
     const event = req.body;
-    console.log("Stripe webhook event:", event.type);
+    logger.info("Stripe webhook event received", {type: event.type});
 
     if (event.type === "checkout.session.completed" ||
         event.type === "payment_intent.succeeded") {
@@ -50,7 +52,19 @@ exports.stripeWebhook = onRequest({
       };
 
       await db.collection("licenses").doc(licenseKey).set(licenseData);
-      console.log("License created:", licenseKey, "for email:", customerEmail);
+      logger.info("License created", {licenseKey, customerEmail});
+
+      // Queue license email to be sent via Firebase extension
+      if (customerEmail) {
+        await queueLicenseEmail({
+          to: customerEmail,
+          licenseKey: licenseKey,
+          orderId: session.id,
+          name: session.customer_details && session.customer_details.name ?
+                session.customer_details.name : undefined,
+        });
+        logger.info("License email queued", {customerEmail});
+      }
 
       res.status(200).json({
         success: true,
@@ -58,11 +72,11 @@ exports.stripeWebhook = onRequest({
         message: "License generated successfully",
       });
     } else {
-      console.log("Unhandled event type:", event.type);
+      logger.info("Unhandled event type", {type: event.type});
       res.status(200).json({success: true, message: "Event received"});
     }
   } catch (error) {
-    console.error("Webhook error:", error);
+    logger.error("Webhook error", {error: error.message});
     res.status(400).json({error: "Webhook failed", details: error.message});
   }
 });
