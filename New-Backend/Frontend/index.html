@@ -13,17 +13,21 @@
         var u = new URL(location.href);
         var path = (u.pathname || "").replace(/\/+$/,'');
         var forcedTrial = /(^|\/)(app\/trial|trial)(\/|$)/.test(path) || u.searchParams.get("mode")==="trial";
+        var forcedPro = /(^|\/)(app\/pro|pro)(\/|$)/.test(path) || u.searchParams.get("mode")==="pro";
         // Visible build mark so we know this HTML is the one deployed
-        window.__SF_BUILD__ = "force-trial-" + new Date().toISOString();
+        window.__SF_BUILD__ = "force-modes-" + new Date().toISOString();
         if (forcedTrial) {
           localStorage.removeItem("proLicenseActive");
           localStorage.setItem("userMode","trial");
+        } else if (forcedPro) {
+          localStorage.setItem("proLicenseActive", "true");
+          localStorage.setItem("userMode","pro");
         }
       } catch(e){}
     })();
     </script>
-    <script type="module" crossorigin src="/assets/index-D518hzp7.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BFCahHQN.css">
+    <script type="module" crossorigin src="/assets/index-Bxmxmjqy.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-C3yO3Gu1.css">
   </head>
   <body>
     <div id="root"></div>
