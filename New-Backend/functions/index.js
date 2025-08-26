@@ -25,21 +25,14 @@ const { testEmail } = require("./src/testEmail");
 exports.validateLicense = onCall(
   {region: REGION},
   async (request) => {
-    const startTime = Date.now();
     const requestId = Math.random().toString(36).slice(2);
     const data = request.data;
     const context = request;
 
     try {
-      console.log(`[${requestId}] License validation started`, {
-        timestamp: new Date().toISOString(),
-        ip: (context.rawRequest && context.rawRequest.ip) || "unknown",
-      });
-
       const { licenseKey, deviceId } = data || {};
 
       if (!licenseKey || typeof licenseKey !== "string") {
-        console.log(`[${requestId}] Invalid input - missing licenseKey`);
         throw new functions.https.HttpsError(
           "invalid-argument",
           "License key is required and must be a string"
@@ -76,20 +69,8 @@ exports.validateLicense = onCall(
         return { success: true, alreadyActivated: false, license: data, message: "License activated successfully!" };
       });
 
-      console.log(`[${requestId}] License validation completed`, {
-        success: true,
-        duration: `${Date.now() - startTime}ms`,
-        alreadyActivated: result.alreadyActivated,
-      });
-
       return result;
     } catch (err) {
-      console.error(`[${requestId}] License validation failed`, {
-        duration: `${Date.now() - startTime}ms`,
-        error: err.message,
-        code: err.code,
-      });
-
       if (err instanceof functions.https.HttpsError) throw err;
       throw new functions.https.HttpsError("internal", "Failed to validate license", err.message);
     }
