@@ -29,24 +29,26 @@ const validateLicense = functions.https.onCall(async (data, context) => {
         );
       }
 
-      if (licenseKey.length < 5 || licenseKey.length > 100) {
-        console.log(`[${requestId}] Invalid license key length:`, licenseKey.length);
+      // Basic format validation (not too restrictive)
+      if (licenseKey.trim().length < 3) {
+        console.log(`[${requestId}] License key too short:`, licenseKey.length);
         throw new functions.https.HttpsError(
           "invalid-argument",
-          "License key has invalid length"
+          "License key is too short"
         );
       }
 
-      console.log(`[${requestId}] Validating license:`, licenseKey);
+      const trimmedKey = licenseKey.trim();
+      console.log(`[${requestId}] Validating license:`, trimmedKey);
 
       // Use transaction for atomic operation
       const db = admin.firestore();
       const result = await db.runTransaction(async (transaction) => {
         const licensesRef = db.collection("licenses");
-        const querySnapshot = await licensesRef.where("key", "==", licenseKey).get();
+        const querySnapshot = await licensesRef.where("key", "==", trimmedKey).get();
 
         if (querySnapshot.empty) {
-          console.log(`[${requestId}] License not found:`, licenseKey);
+          console.log(`[${requestId}] License not found:`, trimmedKey);
           throw new functions.https.HttpsError(
             "not-found", 
             "License key not found"
@@ -57,7 +59,7 @@ const validateLicense = functions.https.onCall(async (data, context) => {
         const licenseData = licenseDoc.data();
         
         console.log(`[${requestId}] Found license:`, {
-          key: licenseKey,
+          key: trimmedKey,
           activated: licenseData.activated,
           email: licenseData.email,
           createdAt: licenseData.createdAt,
@@ -85,7 +87,7 @@ const validateLicense = functions.https.onCall(async (data, context) => {
 
         transaction.update(licenseDoc.ref, updateData);
 
-        console.log(`[${requestId}] License activated successfully:`, licenseKey);
+        console.log(`[${requestId}] License activated successfully:`, trimmedKey);
 
         return {
           success: true,
