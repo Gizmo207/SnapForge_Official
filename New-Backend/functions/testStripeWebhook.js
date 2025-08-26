@@ -15,7 +15,7 @@ const mockEvent = {
       metadata: {
         license_type: 'pro'
       },
-      amount_total: 2999, // $29.99
+      amount_total: 50, // $0.50 (in cents)
       currency: 'usd'
     }
   }
