@@ -85,6 +85,12 @@ exports.testEmail = testEmail;
 const { createCheckoutSession } = require("./src/createCheckoutSession");
 exports.createCheckoutSession = createCheckoutSession;
 
+const { createPaymentIntent } = require("./src/createPaymentIntent");
+exports.createPaymentIntent = createPaymentIntent;
+
+exports.getLicenseForSession =
+  require("./src/getLicenseForSession").getLicenseForSession;
+
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
 
