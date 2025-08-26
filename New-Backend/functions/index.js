@@ -81,6 +81,10 @@ exports.validateLicense = onCall(
 exports.stripeWebhook = stripeWebhook;
 exports.testEmail = testEmail;
 
+// Import and export checkout session creator
+const { createCheckoutSession } = require("./src/createCheckoutSession");
+exports.createCheckoutSession = createCheckoutSession;
+
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
 
