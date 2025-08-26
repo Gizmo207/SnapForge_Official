@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(self 'https://www.paypal.com' 'https://*.paypal.com')" />
+    <title>SnapForge - Premium Image Editor</title>
+    <!-- HARD-FORCE TRIAL & MARK BUILD (runs before React) -->
+    <script>
+    (function () {
+      try {
+        var u = new URL(location.href);
+        var path = (u.pathname || "").replace(/\/+$/,'');
+        var forcedTrial = /(^|\/)(app\/trial|trial)(\/|$)/.test(path) || u.searchParams.get("mode")==="trial";
+        // Visible build mark so we know this HTML is the one deployed
+        window.__SF_BUILD__ = "force-trial-" + new Date().toISOString();
+        if (forcedTrial) {
+          localStorage.removeItem("proLicenseActive");
+          localStorage.setItem("userMode","trial");
+        }
+      } catch(e){}
+    })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-D518hzp7.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BFCahHQN.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
