@@ -56,14 +56,16 @@ const SocialMediaResizeTool: React.FC = () => {
 
         const resizedImageData = canvas.toDataURL('image/png');
         setProcessedImage(resizedImageData);
-        setImageSize({ width: targetWidth, height: targetHeight });
       }
     };
 
+    img.crossOrigin = 'anonymous';
     img.src = originalImage;
+    setImageSize({ width: targetWidth, height: targetHeight });
   };
 
   const handlePresetClick = (preset: SocialMediaPreset) => {
+    console.log('Preset clicked:', preset.name, preset.width, preset.height);
     resizeImage(preset.width, preset.height);
   };
 
@@ -71,7 +73,8 @@ const SocialMediaResizeTool: React.FC = () => {
     const width = parseInt(customWidth);
     const height = parseInt(customHeight);
     
-    if (width > 0 && height > 0) {
+    if (width > 0 && height > 0 && !isNaN(width) && !isNaN(height)) {
+      console.log('Custom resize:', width, height);
       resizeImage(width, height);
     }
   };
