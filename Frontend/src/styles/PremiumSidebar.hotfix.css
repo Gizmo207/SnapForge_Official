@@ -1,0 +1,533 @@
+/* Dark pane override - import LAST to force dark background */
+.tool-viewport {
+  background: #1a1a1a;
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+
+/* EXACT GLOW EFFECT FROM YOUR WORKING BUILD */
+.tool-card {
+    background: rgba(30, 30, 60, 0.6);
+    border: 1px solid rgba(64, 224, 255, 0.2);
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        0 0 20px rgba(64, 224, 255, 0.1),
+        0 0 40px rgba(64, 224, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.tool-card::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 255, 255, 0.4),
+        rgba(255, 0, 255, 0.4),
+        rgba(0, 255, 255, 0.4),
+        rgba(255, 0, 255, 0.4),
+        rgba(0, 255, 255, 0.4)
+    );
+    background-size: 200% 200%;
+    animation: gradientShift 5s ease infinite;
+    border-radius: 24px;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.tool-card:hover::before {
+    opacity: 0.7;
+    animation-duration: 2.5s;
+}
+
+.tool-card:hover {
+    border-color: rgba(64, 224, 255, 0.5);
+    background: rgba(30, 30, 60, 0.8);
+    transform: translateY(-4px);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(64, 224, 255, 0.25),
+        0 0 80px rgba(64, 224, 255, 0.15),
+        0 0 120px rgba(64, 224, 255, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* SOCIAL MEDIA PRESET BUTTONS - Make them match the dark theme */
+.preset-btn {
+    background: rgba(25, 25, 50, 0.8) !important;
+    border: 1px solid rgba(64, 224, 255, 0.3) !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.15),
+        0 0 10px rgba(64, 224, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03) !important;
+}
+
+.preset-btn:hover {
+    background: rgba(30, 30, 60, 0.9) !important;
+    border-color: rgba(64, 224, 255, 0.5) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.2),
+        0 0 20px rgba(64, 224, 255, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.preset-name {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    text-shadow: 0 0 5px rgba(64, 224, 255, 0.3) !important;
+}
+
+.preset-size {
+    color: rgba(64, 224, 255, 0.8) !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    text-shadow: 0 0 3px rgba(64, 224, 255, 0.2) !important;
+}
+
+/* CUSTOM SIZE SECTION - Fix readability of width/height labels */
+.slider-group label {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    text-shadow: 0 0 5px rgba(64, 224, 255, 0.4) !important;
+}
+
+.slider-group label span:first-child {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 0 0 8px rgba(64, 224, 255, 0.5) !important;
+}
+
+.slider-value {
+    color: rgba(64, 224, 255, 0.9) !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    text-shadow: 0 0 5px rgba(64, 224, 255, 0.3) !important;
+}
+
+.adjustment-slider {
+    background: rgba(30, 30, 60, 0.8) !important;
+    border: 1px solid rgba(64, 224, 255, 0.2) !important;
+    border-radius: 4px !important;
+    height: 6px !important;
+}
+
+.adjustment-slider::-webkit-slider-thumb {
+    background: linear-gradient(135deg, rgba(64, 224, 255, 0.9), rgba(255, 64, 255, 0.9)) !important;
+    width: 18px !important;
+    height: 18px !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 0 10px rgba(64, 224, 255, 0.5) !important;
+}
+
+.adjustment-slider::-moz-range-thumb {
+    background: linear-gradient(135deg, rgba(64, 224, 255, 0.9), rgba(255, 64, 255, 0.9)) !important;
+    width: 18px !important;
+    height: 18px !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 0 10px rgba(64, 224, 255, 0.5) !important;
+}
+
+/* INNER CONTENT STYLING - Make the collapsible content area smooth and glowing */
+.tool-content {
+    background: rgba(25, 25, 50, 0.8);
+    border: 1px solid rgba(64, 224, 255, 0.15);
+    border-radius: 16px;
+    padding: 16px;
+    margin-top: 12px;
+    position: relative;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        0 0 15px rgba(64, 224, 255, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+/* Subtle animated border for inner content */
+.tool-content::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 255, 255, 0.15),
+        rgba(255, 0, 255, 0.15),
+        rgba(0, 255, 255, 0.15),
+        rgba(255, 0, 255, 0.15),
+        rgba(0, 255, 255, 0.15)
+    );
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+    border-radius: 17px;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+/* COLLAPSED PANEL STYLING - Make tool headers smooth and rainbow when collapsed */
+.tool-header {
+    background: rgba(30, 30, 60, 0.6);
+    border: 1px solid rgba(64, 224, 255, 0.2);
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        0 0 20px rgba(64, 224, 255, 0.1),
+        0 0 40px rgba(64, 224, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Rainbow border for collapsed tool headers */
+.tool-header::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 255, 255, 0.4),
+        rgba(255, 0, 255, 0.4),
+        rgba(0, 255, 255, 0.4),
+        rgba(255, 0, 255, 0.4),
+        rgba(0, 255, 255, 0.4)
+    );
+    background-size: 200% 200%;
+    animation: gradientShift 5s ease infinite;
+    border-radius: 24px;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.tool-header.clickable:hover {
+    border-color: rgba(64, 224, 255, 0.5);
+    background: rgba(30, 30, 60, 0.8);
+    transform: translateY(-4px);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(64, 224, 255, 0.25),
+        0 0 80px rgba(64, 224, 255, 0.15),
+        0 0 120px rgba(64, 224, 255, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.tool-header.clickable:hover::before {
+    opacity: 0.7;
+    animation-duration: 2.5s;
+}
+
+.tool-info h3 {
+  color: #ffffff;
+}
+
+.tool-info p {
+  color: #cccccc;
+}
+
+.tool-content {
+  background: #2a2a2a;
+  color: #ffffff;
+}
+
+.processing-status {
+  color: #cccccc;
+}
+
+.status-message {
+  color: #ffffff;
+}
+
+/* TOOL 2: COLOR & FILTER TOOL STYLING */
+/* Filter button grid styling */
+.filter-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+  gap: 12px !important;
+  margin-top: 12px !important;
+}
+
+/* Individual filter buttons */
+.filter-btn {
+  background: rgba(30, 30, 60, 0.6) !important;
+  border: 1px solid rgba(64, 224, 255, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 12px 8px !important;
+  color: white !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  flex-direction: column-reverse !important;
+  align-items: center !important;
+  gap: 6px !important;
+  text-shadow: 0 0 10px rgba(64, 224, 255, 0.8) !important;
+}
+
+.filter-btn:hover {
+  background: rgba(40, 40, 80, 0.8) !important;
+  border-color: rgba(64, 224, 255, 0.6) !important;
+  box-shadow: 0 0 15px rgba(64, 224, 255, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.filter-btn:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 0 20px rgba(64, 224, 255, 0.6) !important;
+}
+
+/* Filter preview icons */
+.filter-preview {
+  font-size: 20px !important;
+  margin-top: 4px !important;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6)) !important;
+  order: 2 !important;
+}
+
+/* Reset button for filters */
+.reset-btn {
+  background: rgba(60, 20, 20, 0.6) !important;
+  border: 1px solid rgba(255, 100, 100, 0.3) !important;
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  color: white !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  text-shadow: 0 0 10px rgba(255, 100, 100, 0.8) !important;
+}
+
+.reset-btn:hover {
+  background: rgba(80, 30, 30, 0.8) !important;
+  border-color: rgba(255, 100, 100, 0.6) !important;
+  box-shadow: 0 0 15px rgba(255, 100, 100, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Fix for Black & White tool icon spacing */
+.tool-icon {
+  margin-right: 15px !important;
+  min-width: 35px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
+  letter-spacing: 1px !important;
+}
+
+/* Put tool icons under the text for better layout */
+.tool-header {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.tool-header .tool-icon {
+  margin-right: 0 !important;
+  margin-top: -8px !important;
+  order: 2 !important;
+}
+
+.tool-header .tool-info {
+  order: 1 !important;
+}
+
+/* TOOL 3: FORMAT CONVERTER STYLING */
+/* Format buttons grid */
+.format-buttons {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)) !important;
+  gap: 12px !important;
+  margin: 16px 0 !important;
+}
+
+/* Individual format buttons */
+.format-btn {
+  background: rgba(30, 30, 60, 0.6) !important;
+  border: 1px solid rgba(64, 224, 255, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 12px 8px !important;
+  color: white !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  text-shadow: 0 0 10px rgba(64, 224, 255, 0.8) !important;
+  text-transform: uppercase !important;
+}
+
+.format-btn:hover {
+  background: rgba(40, 40, 80, 0.8) !important;
+  border-color: rgba(64, 224, 255, 0.6) !important;
+  box-shadow: 0 0 15px rgba(64, 224, 255, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* --- CLICK THRU HOTFIX FOR TOOL BUTTONS --- */
+.premium-sidebar { position: relative; }
+
+.premium-sidebar .upload-section {
+  position: relative;
+  z-index: 1;        /* upload stays below tool cards */
+}
+
+.premium-sidebar .tool-card {
+  position: relative;
+  z-index: 1000;     /* ensure tool buttons are on top */
+}
+
+.premium-sidebar .tool-card * {
+  pointer-events: auto;  /* make sure children (buttons, sliders) get clicks */
+}
+
+/* If anything global is overlaying the sidebar, pull the whole content above */
+.premium-sidebar .sidebar-content {
+  position: relative;
+  z-index: 1000;
+}
+
+.format-btn.active {
+  background: rgba(64, 224, 255, 0.2) !important;
+  border-color: rgba(64, 224, 255, 0.8) !important;
+  box-shadow: 0 0 20px rgba(64, 224, 255, 0.6) !important;
+  color: #00ffff !important;
+  text-shadow: 0 0 15px rgba(0, 255, 255, 1) !important;
+}
+
+/* Convert button styling */
+.tool-button {
+  background: linear-gradient(45deg, rgba(64, 224, 255, 0.2), rgba(255, 0, 255, 0.2)) !important;
+  border: 1px solid rgba(64, 224, 255, 0.4) !important;
+  border-radius: 10px !important;
+  padding: 14px 20px !important;
+  color: white !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  text-shadow: 0 0 12px rgba(64, 224, 255, 0.9) !important;
+  width: 100% !important;
+}
+
+.tool-button:hover:not(:disabled) {
+  background: linear-gradient(45deg, rgba(64, 224, 255, 0.4), rgba(255, 0, 255, 0.4)) !important;
+  border-color: rgba(64, 224, 255, 0.7) !important;
+  box-shadow: 0 0 20px rgba(64, 224, 255, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+.tool-button:disabled {
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+}
+
+/* Format description text */
+.format-description p {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 14px !important;
+  text-shadow: 0 0 8px rgba(64, 224, 255, 0.6) !important;
+  margin: 0 !important;
+}
+
+/* TOOL 8: FACE FIXER STYLING */
+/* Success notification */
+.success-notification {
+  background: rgba(0, 255, 0, 0.1) !important;
+  border: 1px solid rgba(0, 255, 0, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  text-align: center !important;
+}
+
+.success-message {
+  color: #00ff88 !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.8) !important;
+}
+
+/* Adjustment section styling */
+.adjustment-section h4 {
+  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(64, 224, 255, 0.8) !important;
+  font-size: 16px !important;
+  margin-bottom: 12px !important;
+}
+
+/* Processing button states */
+.tool-button.processing {
+  background: linear-gradient(45deg, rgba(255, 165, 0, 0.3), rgba(255, 69, 0, 0.3)) !important;
+  border-color: rgba(255, 165, 0, 0.5) !important;
+  animation: processingPulse 1.5s ease-in-out infinite !important;
+}
+
+@keyframes processingPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; box-shadow: 0 0 25px rgba(255, 165, 0, 0.6); }
+}
+
+/* Toggle buttons - different from filter buttons */
+.toggle-btn {
+  background: rgba(60, 60, 100, 0.4) !important;
+  border: 1px solid rgba(100, 100, 150, 0.3) !important;
+  border-radius: 6px !important;
+  padding: 10px 8px !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 4px !important;
+  text-shadow: 0 0 5px rgba(150, 150, 200, 0.6) !important;
+}
+
+.toggle-btn:hover {
+  background: rgba(80, 80, 120, 0.6) !important;
+  border-color: rgba(150, 150, 200, 0.5) !important;
+  transform: translateY(-1px) !important;
+}
+
+.toggle-btn.active {
+  background: rgba(100, 150, 100, 0.3) !important;
+  border-color: rgba(100, 200, 100, 0.6) !important;
+  color: #90ff90 !important;
+  text-shadow: 0 0 10px rgba(144, 255, 144, 0.8) !important;
+}
